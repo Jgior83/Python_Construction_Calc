@@ -1,0 +1,136 @@
+def main():
+    """
+    Main interface for the Construction Calculator.
+    Provides options for metric or imperial systems and calls appropriate subroutines.
+    """
+    print("Welcome to the Construction Calculator\n")
+
+    # Select measurement system
+    measurement_system = choose_measurement_system()
+
+    # Main loop to select calculations
+    while True:
+        # Present menu options to the user
+        print("\nChoose the calculation you wish to perform:")
+        print("1. Room Area")
+        print("2. Wall Area")
+        print("3. Room Volume")
+        print("4. Exit")
+
+        # Capture the user's choice input
+        choice = input("Enter your choice (1-4): ")
+
+        # Execute corresponding function based on user's choice
+        if choice == "1":
+            calculate_room_area(measurement_system)
+        elif choice == "2":
+            calculate_wall_area(measurement_system)
+        elif choice == "3":
+            calculate_room_volume(measurement_system)
+        elif choice == "4":
+            # User chooses to exit
+            print("Exiting the program.")
+            break
+        else:
+            # Invalid input handling
+            print("Invalid choice, please try again.\n")
+def choose_measurement_system():
+    """
+    Prompts user to select the measurement system: Metric or Imperial.
+    Returns 1 for Metric and 2 for Imperial.
+    """
+    while True:
+        # Ask the user to choose the measurement system
+        measurement_system = input("Choose your measurement system (1 for Metric, 2 for Imperial): ")
+        if measurement_system in ["1", "2"]:
+            # Return the user's choice if it's valid
+            return measurement_system
+        else:
+            # Inform the user that the choice is invalid and ask them to choose again
+            print("Invalid choice, please enter 1 for Metric or 2 for Imperial.\n")
+
+def calculate_room_area(measurement_system):
+    """
+    Calculates the area of a room based on user input and selected measurement system.
+    """
+    # Prompt the user to input the length of the room and convert it to a float.
+    length = float(input("Enter the length of the room: "))
+    
+    # Prompt the user to input the width of the room and convert it to a float.
+    width = float(input("Enter the width of the room: "))
+
+    # Check if the measurement system is Metric ('1').
+    if measurement_system == "1":
+        # Calculate the area in square meters by multiplying length and width.
+        area = length * width
+        # Output the calculated area in square meters.
+        print(f"Room area is {area} square meters.\n")
+    else:
+        # Calculate the area in square feet by multiplying length and width.
+        area = length * width
+        # Convert the calculated area from square feet to square meters.
+        area_meters = area * (1 / 3.28084) ** 2
+        # Output the calculated area in square feet and its equivalent in square meters.
+        print(f"Room area is {area} square feet ({area_meters:.2f} square meters).\n")
+
+def calculate_wall_area(measurement_system):
+    """
+    Calculates the total area of walls based on user input and selected measurement system.
+    """
+    # Prompt the user to input the height of one wall and convert it to a float.
+    height = float(input("Enter the height of the wall: "))
+
+    # Prompt the user to input the width of one wall and convert it to a float.
+    width = float(input("Enter the width of the wall: "))
+
+    # Prompt the user to input the number of similar walls as an integer.
+    num_walls = int(input("Enter the number of similar walls: "))
+
+    # Prompt the user to input the total area deducted for doors/windows, if any, and convert it to a float.
+    deduction = float(input("Enter total area deducted for doors/windows (optional, else 0): "))
+
+    # Check if the measurement system is Metric ('1').
+    if measurement_system == "1":
+        # Calculate the total wall area by multiplying height, width and number of walls, then subtract deduction.
+        total_wall_area = (height * width * num_walls) - deduction
+        # Output the total wall area in square meters.
+        print(f"Total wall area is {total_wall_area} square meters.\n")
+    else:
+        # Calculate the total wall area by multiplying height, width and number of walls, then subtract deduction.
+        total_wall_area = (height * width * num_walls) - deduction
+        # Convert the total wall area from square feet to square meters.
+        total_wall_area_meters = total_wall_area * (1 / 3.28084) ** 2
+        # Output the total wall area in square feet and its equivalent in square meters.
+        print(f"Total wall area is {total_wall_area} square feet ({total_wall_area_meters:.2f} square meters).\n")
+
+def calculate_room_volume(measurement_system):
+    """
+    Calculates the volume of a room based on user input and selected measurement system.
+    """
+    # Prompt the user to input the length of the room and convert it to a float.
+    length = float(input("Enter the length of the room: "))
+    
+    # Prompt the user to input the width of the room and convert it to a float.
+    width = float(input("Enter the width of the room: "))
+    
+    # Prompt the user to input the height of the room and convert it to a float.
+    height = float(input("Enter the height of the room: "))
+
+    # Check if the measurement system is Metric ('1').
+    if measurement_system == "1":
+        # Calculate the volume in cubic meters by multiplying length, width, and height.
+        volume = length * width * height
+        # Output the calculated volume in cubic meters.
+        print(f"Room volume is {volume} cubic meters.\n")
+    else:
+        # Calculate the volume in cubic feet by multiplying length, width, and height.
+        volume = length * width * height
+        # Convert the calculated volume from cubic feet to cubic meters.
+        volume_meters = volume * (1 / 3.28084) ** 3
+        # Output the calculated volume in cubic feet and its equivalent in cubic meters.
+        print(f"Room volume is {volume} cubic feet ({volume_meters:.2f} cubic meters).\n")
+
+# Run the calculator program
+if __name__ == "__main__":
+    main()
+
